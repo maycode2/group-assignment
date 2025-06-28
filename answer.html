@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Answer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Here’s how you can help your child:</h2>
+    <p id="responseText">Loading...</p>
+    <button onclick="location.href='question.html'">Ask Another Question</button>
+  </div>
+
+  <script>
+    const question = localStorage.getItem('userQuestion') || "";
+
+    let response = "Sorry, I couldn't understand the question.";
+
+    if (question.toLowerCase().includes("math")) {
+      response = "Try breaking the problem into steps. Ask what is known and what is missing.";
+    } else if (question.toLowerCase().includes("science")) {
+      response = "Help your child understand the concept with a simple experiment or story.";
+    } else if (question.toLowerCase().includes("english")) {
+      response = "Practice with examples. Ask them to explain the sentence in their own words.";
+    } else if (question.trim() !== "") {
+      response = "Let’s walk through this together. Start by reading the question aloud.";
+    }
+
+    document.getElementById("responseText").innerText = response;
+
+    const count = localStorage.getItem('questionCount') || 1;
+    const usageNote = document.createElement('p');
+    usageNote.innerText = `You’ve used ${count} out of 10 free questions.`;
+    document.querySelector('.container').appendChild(usageNote);
+  </script>
+</body>
+</html>

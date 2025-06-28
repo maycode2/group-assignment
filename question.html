@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask a Question</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Ask a Question</h2>
+    
+    <form onsubmit="handleSubmit(event)">
+      <textarea id="questionInput" placeholder="Type your question here..." rows="4" required></textarea>
+      <p>OR</p>
+      <input type="file" accept="image/*">
+      <br><br>
+      <button type="submit">Get Help</button>
+    </form>
+  </div>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      const question = document.getElementById('questionInput').value;
+      localStorage.setItem('userQuestion', question);
+
+      let count = localStorage.getItem('questionCount') || 0;
+      count++;
+      localStorage.setItem('questionCount', count);
+
+      window.location.href = 'answer.html';
+    }
+  </script>
+</body>
+</html>
